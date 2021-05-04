@@ -1,0 +1,85 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Categorias</li>
+	</ol>
+</nav>
+
+<div class="d-flex justify-content-between d-flex align-items-center mb-5">
+	<h2 class="mb-0">
+		Categorias
+		<small class="text-muted">Lista de categorias</small>
+	</h2>
+	<a class="btn btn-sm btn-primary" routerLink="new"> Nova categoria </a>
+</div>
+
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" class="w-100">Categoria</th>
+			<th scope="col" class="text-center">Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<strong class="d-inline-block mr-2">Lazer</strong>
+				<small>Cinema, parque, clube</small>
+			</td>
+			<td class="actions">
+				<a
+					[routerLink]="[1, 'edit']"
+					class="btn btn-sm btn-outline-secondary mr-2"
+				>
+					Editar
+				</a>
+				<a class="btn btn-sm btn-outline-danger">Excluir</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong class="d-inline-block mr-2">Lazer</strong>
+				<small>Cinema, parque, clube</small>
+			</td>
+			<td class="actions">
+				<a
+					[routerLink]="[1, 'edit']"
+					class="btn btn-sm btn-outline-secondary mr-2"
+				>
+					Editar
+				</a>
+				<a class="btn btn-sm btn-outline-danger">Excluir</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong class="d-inline-block mr-2">Lazer</strong>
+				<small>Cinema, parque, clube</small>
+			</td>
+			<td class="actions">
+				<a
+					[routerLink]="[1, 'edit']"
+					class="btn btn-sm btn-outline-secondary mr-2"
+				>
+					Editar
+				</a>
+				<a class="btn btn-sm btn-outline-danger">Excluir</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong class="d-inline-block mr-2">Lazer</strong>
+				<small>Cinema, parque, clube</small>
+			</td>
+			<td class="actions">
+				<a
+					[routerLink]="[1, 'edit']"
+					class="btn btn-sm btn-outline-secondary mr-2"
+				>
+					Editar
+				</a>
+				<a class="btn btn-sm btn-outline-danger">Excluir</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
