@@ -1,1 +1,62 @@
-<p>category-form works!</p>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/categories">Categorias</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Formulário</li>
+	</ol>
+</nav>
+
+<div class="d-flex justify-content-between d-flex align-items-center mb-5">
+	<h2 class="mb-0">
+		Formulário
+		<small class="text-muted">{{ pageTitle }}</small>
+	</h2>
+	<a class="btn btn-sm btn-primary" routerLink="/categories">Voltar</a>
+</div>
+
+<div class="card">
+	<div class="card-header">Informações sobre a categoria</div>
+	<div class="card-body">
+		<form [formGroup]="categoryForm" (submit)="submitForm()">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="name">Nome</label>
+					<input
+						type="text"
+						class="form-control"
+						id="name"
+						formControlName="name"
+						required
+					/>
+					<div class="text-danger" *ngIf="categoryForm.get('name').touched">
+						<div *ngIf="categoryForm.get('name').errors?.required">
+							Dado obrigatório
+						</div>
+						<div *ngIf="categoryForm.get('name').errors?.minlength">
+							Mínimo 3 caracteres
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-8">
+					<label for="description">Descrição</label>
+					<input
+						type="text"
+						class="form-control"
+						id="description"
+						formControlName="description"
+					/>
+					<div class="invalid-feedback">Please provide a valid city.</div>
+				</div>
+			</div>
+			<div class="text-right">
+				<button
+					[disabled]="submittingForm || categoryForm.invalid"
+					type="submit"
+					class="btn btn-primary"
+				>
+					Salvar
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
