@@ -69,7 +69,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
 				.subscribe(
 					(response) => {
 						this.category = response;
-						//this.categoryForm.patchValue(this.category);
+						//this.categoryForm.patchValue(this.category); // Não funcionou dessa forma
 						const { id, name, description } = this.category;
 						this.categoryForm.patchValue({
 							id,

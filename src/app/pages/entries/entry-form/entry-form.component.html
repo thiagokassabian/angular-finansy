@@ -1,0 +1,130 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+		<li class="breadcrumb-item"><a routerLink="/entries">Lançamentos</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Formulário</li>
+	</ol>
+</nav>
+
+<div class="d-flex justify-content-between d-flex align-items-center mb-5">
+	<h2 class="mb-0">
+		Formulário
+		<small class="text-muted">{{ pageTitle }}</small>
+	</h2>
+	<a class="btn btn-sm btn-primary" routerLink="/entries">Voltar</a>
+</div>
+
+<div class="card">
+	<div class="card-header">Informações sobre o lançamento</div>
+	<div class="card-body">
+		<form [formGroup]="entryForm" (submit)="submitForm()">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label for="name">Tipo</label>
+					<select
+						name="type"
+						id="type"
+						class="form-control"
+						formControlName="type"
+					>
+						<option value="expense">Despesa</option>
+						<option value="revenue">Receita</option>
+					</select>
+
+					<div class="text-danger" *ngIf="entryForm.get('type').touched">
+						<div *ngIf="entryForm.get('name').errors?.required">
+							Dado obrigatório
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="name">Lançamento</label>
+					<input
+						type="text"
+						class="form-control"
+						id="name"
+						formControlName="name"
+						required
+					/>
+					<div class="text-danger" *ngIf="entryForm.get('name').touched">
+						<div *ngIf="entryForm.get('name').errors?.required">
+							Dado obrigatório
+						</div>
+						<div *ngIf="entryForm.get('name').errors?.minlength">
+							Mínimo 3 caracteres
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="amount">Valor</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="valor-reais">R$</span>
+						</div>
+						<input
+							[imask]="imaskConfig"
+							type="text"
+							class="form-control text-right"
+							id="amount"
+							formControlName="amount"
+							aria-label="Valor"
+							aria-describedby="valor-reais"
+							required
+						/>
+					</div>
+
+					<div class="text-danger" *ngIf="entryForm.get('amount').touched">
+						<div *ngIf="entryForm.get('amount').errors?.required">
+							Dado obrigatório
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="date">Data</label>
+					<p-calendar
+						id="date"
+						styleClass="w-100"
+						inputStyleClass="form-control"
+						formControlName="date"
+						dataType="string"
+						dateFormat="dd/mm/yy"
+						[locale]="pt"
+						[showButtonBar]="true"
+						[monthNavigator]="true"
+					></p-calendar>
+					<div class="text-danger" *ngIf="entryForm.get('date').touched">
+						<div *ngIf="entryForm.get('date').errors?.required">
+							Dado obrigatório
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-8">
+					<label for="description">Descrição</label>
+					<input
+						type="text"
+						class="form-control"
+						id="description"
+						formControlName="description"
+					/>
+				</div>
+			</div>
+			<div class="text-right">
+				<button
+					[disabled]="submittingForm || entryForm.invalid"
+					type="submit"
+					class="btn btn-primary"
+				>
+					Salvar
+				</button>
+			</div>
+			<div class="alert alert-danger" *ngIf="serverErrorMessages">
+				<p>Erro do servidor</p>
+				<ul>
+					<li *ngFor="let error of serverErrorMessages">{{ error }}</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+</div>

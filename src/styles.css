@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+	padding-top: 56px;
+}
 .table td {
 	vertical-align: middle;
 }
 .table td.actions {
 	white-space: nowrap;
+}
+.p-datepicker {
+	z-index: 1031 !important;
 }

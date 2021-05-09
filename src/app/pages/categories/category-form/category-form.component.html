@@ -45,7 +45,6 @@
 						id="description"
 						formControlName="description"
 					/>
-					<div class="invalid-feedback">Please provide a valid city.</div>
 				</div>
 			</div>
 			<div class="text-right">
@@ -56,6 +55,12 @@
 				>
 					Salvar
 				</button>
+			</div>
+			<div class="alert alert-danger" *ngIf="serverErrorMessages">
+				<p>Erro do servidor</p>
+				<ul>
+					<li *ngFor="let error of serverErrorMessages">{{ error }}</li>
+				</ul>
 			</div>
 		</form>
 	</div>
