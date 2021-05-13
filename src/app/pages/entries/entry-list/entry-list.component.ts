@@ -19,7 +19,7 @@ export class EntryListComponent implements OnInit {
 	getEntries = () => {
 		this.entryService.getAll().subscribe(
 			(response) => {
-				this.entries = response;
+				this.entries = response.sort((a, b) => b.id - a.id);
 			},
 			(error) => console.log('Erro ao carregar a lista', error)
 		);
