@@ -13,7 +13,8 @@ import toastr from 'toastr';
 
 @Directive()
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
-	implements OnInit, AfterContentChecked {
+	implements OnInit, AfterContentChecked
+{
 	currentAction: string;
 	resourceForm: FormGroup;
 	pageTitle: string;

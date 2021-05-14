@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { CategoryService } from '../category.service';
 import { Category } from '../category.model';
 import { BaseResourceFormComponent } from 'src/app/shared/base-resource-form/base-resource-form.component';
+import { SpinnerService } from 'src/app/core/components/spinner/spinner.service';
 
 @Component({
 	selector: 'app-category-form',
@@ -11,6 +12,7 @@ import { BaseResourceFormComponent } from 'src/app/shared/base-resource-form/bas
 })
 export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
 	constructor(
+		public spinnerService: SpinnerService,
 		protected categoryService: CategoryService,
 		protected injector: Injector
 	) {

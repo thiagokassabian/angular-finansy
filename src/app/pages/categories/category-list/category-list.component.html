@@ -1,44 +1,41 @@
-<nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Categorias</li>
-	</ol>
-</nav>
+<div *ngIf="(spinnerService.isLoading | async) === false">
+	<app-breadcrumb [items]="[{ text: 'Categorias' }]"></app-breadcrumb>
 
-<div class="d-flex justify-content-between d-flex align-items-center mb-5">
-	<h2 class="mb-0">
-		Categorias
-		<small class="text-muted">Lista de categorias</small>
-	</h2>
-	<a class="btn btn-sm btn-primary" routerLink="new"> Nova categoria </a>
+	<page-header
+		page-name="Categorias"
+		page-title="Lista de categorias"
+		button-class="btn-primary"
+		button-link="new"
+		button-text="Nova categoria"
+	></page-header>
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col" class="w-100">Categoria</th>
+				<th scope="col" class="text-center">Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let category of resources">
+				<td>
+					<strong class="d-inline-block mr-2">{{ category.name }}</strong>
+					<small>{{ category.description }}</small>
+				</td>
+				<td class="actions">
+					<a
+						[routerLink]="[category.id, 'edit']"
+						class="btn btn-sm btn-outline-secondary mr-2"
+					>
+						Editar
+					</a>
+					<a
+						class="btn btn-sm btn-outline-danger"
+						(click)="deleteResource(category.id)"
+						>Excluir</a
+					>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-
-<table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col" class="w-100">Categoria</th>
-			<th scope="col" class="text-center">Ações</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let category of categories">
-			<td>
-				<strong class="d-inline-block mr-2">{{ category.name }}</strong>
-				<small>{{ category.description }}</small>
-			</td>
-			<td class="actions">
-				<a
-					[routerLink]="[category.id, 'edit']"
-					class="btn btn-sm btn-outline-secondary mr-2"
-				>
-					Editar
-				</a>
-				<a
-					class="btn btn-sm btn-outline-danger"
-					(click)="deleteCategory(category.id)"
-					>Excluir</a
-				>
-			</td>
-		</tr>
-	</tbody>
-</table>

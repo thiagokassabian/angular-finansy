@@ -5,6 +5,7 @@ import { Entry } from '../entry.model';
 import { Category } from '../../categories/category.model';
 import { CategoryService } from '../../categories/category.service';
 import { BaseResourceFormComponent } from 'src/app/shared/base-resource-form/base-resource-form.component';
+import { SpinnerService } from 'src/app/core/components/spinner/spinner.service';
 
 @Component({
 	selector: 'app-entry-form',
@@ -16,6 +17,7 @@ export class EntryFormComponent
 	implements OnInit
 {
 	categories: Category[];
+	isLoading: boolean = true;
 
 	imaskConfig = {
 		mask: Number, // enable number mask
@@ -29,6 +31,7 @@ export class EntryFormComponent
 	};
 
 	constructor(
+		public spinnerService: SpinnerService,
 		protected entryService: EntryService,
 		protected categoryService: CategoryService,
 		protected injector: Injector

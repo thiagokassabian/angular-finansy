@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between d-flex align-items-center mb-5">
+	<h2 class="mb-0">
+		{{ pageName }}
+		<small class="text-muted">{{ pageTitle }}</small>
+	</h2>
+	<a [ngClass]="buttonClass" class="btn btn-sm" [routerLink]="buttonLink">{{
+		buttonText
+	}}</a>
+</div>

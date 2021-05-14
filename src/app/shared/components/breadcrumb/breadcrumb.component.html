@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+		<li
+			class="breadcrumb-item"
+			*ngFor="let item of items; let i = index"
+			[class.active]="i === items.length - 1"
+		>
+			<ng-container *ngIf="i !== items.length - 1; else lastItem">
+				<a [routerLink]="item.link">{{ item.text }}</a>
+			</ng-container>
+			<ng-template #lastItem>{{ item.text }}</ng-template>
+		</li>
+	</ol>
+</nav>

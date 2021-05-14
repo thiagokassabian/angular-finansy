@@ -1,60 +1,57 @@
-<nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
-	</ol>
-</nav>
+<div *ngIf="(spinnerService.isLoading | async) === false">
+	<app-breadcrumb [items]="[{ text: 'Lançamentos' }]"></app-breadcrumb>
 
-<div class="d-flex justify-content-between d-flex align-items-center mb-5">
-	<h2 class="mb-0">
-		Lançamentos
-		<small class="text-muted">Lista de categorias</small>
-	</h2>
-	<a class="btn btn-sm btn-primary" routerLink="new"> Novo lançamento </a>
+	<page-header
+		page-name="Lançamentos"
+		page-title="Lista de categorias"
+		button-class="btn-primary"
+		button-link="new"
+		button-text="Novo lançamento"
+	></page-header>
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col" class="text-center">Data</th>
+				<th scope="col" class="w-100">Lançamento</th>
+				<th scope="col" class="text-center">Categoria</th>
+				<th scope="col" class="text-right">Valor</th>
+				<th scope="col" class="text-center">Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let entry of resources">
+				<td class="text-center">{{ entry.date }}</td>
+				<td>
+					<strong class="d-inline-block mr-2">{{ entry.name }}</strong>
+					<small>{{ entry.description }}</small>
+				</td>
+				<td class="text-center">{{ entry.category.name }}</td>
+				<td
+					class="text-right"
+					[class.text-success]="entry.type === 'revenue'"
+					[class.text-danger]="entry.type === 'expense'"
+				>
+					{{ entry.amount }}<br />
+					<span class="badge badge-pill badge-secondary">{{
+						entry.paidText
+					}}</span>
+				</td>
+				<td class="actions">
+					<a
+						[routerLink]="[entry.id, 'edit']"
+						class="btn btn-sm btn-outline-secondary mr-2"
+					>
+						Editar
+					</a>
+					<button
+						class="btn btn-sm btn-outline-danger"
+						(click)="deleteResource(entry.id)"
+					>
+						Excluir
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-
-<table class="table">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col" class="text-center">Data</th>
-			<th scope="col" class="w-100">Lançamento</th>
-			<th scope="col" class="text-center">Categoria</th>
-			<th scope="col" class="text-right">Valor</th>
-			<th scope="col" class="text-center">Ações</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let entry of entries">
-			<td class="text-center">{{ entry.date }}</td>
-			<td>
-				<strong class="d-inline-block mr-2">{{ entry.name }}</strong>
-				<small>{{ entry.description }}</small>
-			</td>
-			<td class="text-center">{{ entry.category.name }}</td>
-			<td
-				class="text-right"
-				[class.text-success]="entry.type === 'revenue'"
-				[class.text-danger]="entry.type === 'expense'"
-			>
-				{{ entry.amount }}<br />
-				<span class="badge badge-pill badge-secondary">{{
-					entry.paidText
-				}}</span>
-			</td>
-			<td class="actions">
-				<a
-					[routerLink]="[entry.id, 'edit']"
-					class="btn btn-sm btn-outline-secondary mr-2"
-				>
-					Editar
-				</a>
-				<button
-					class="btn btn-sm btn-outline-danger"
-					(click)="deleteEntry(entry.id)"
-				>
-					Excluir
-				</button>
-			</td>
-		</tr>
-	</tbody>
-</table>

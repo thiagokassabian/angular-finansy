@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpinnerService } from 'src/app/core/components/spinner/spinner.service';
+import { BaseResourceListComponent } from 'src/app/shared/base-resource-list/base-resource-list.component';
 import { Category } from '../category.model';
 import { CategoryService } from '../category.service';
 
@@ -7,36 +9,11 @@ import { CategoryService } from '../category.service';
 	templateUrl: './category-list.component.html',
 	styleUrls: ['./category-list.component.css'],
 })
-export class CategoryListComponent implements OnInit {
-	categories: Category[] = [];
-
-	constructor(private categoryService: CategoryService) {}
-
-	ngOnInit(): void {
-		this.getCategories();
+export class CategoryListComponent extends BaseResourceListComponent<Category> {
+	constructor(
+		public spinnerService: SpinnerService,
+		protected categoryService: CategoryService
+	) {
+		super(categoryService);
 	}
-
-	getCategories = () => {
-		this.categoryService.getAll().subscribe(
-			(response) => {
-				this.categories = response;
-			},
-			(error) => console.log('Erro ao carregar a lista', error)
-		);
-	};
-
-	deleteCategory = (id: number) => {
-		const confirmation = confirm('Tem certeza que deseja excluir?');
-
-		if (confirmation) {
-			this.categoryService.delete(id).subscribe(
-				() => {
-					this.categories = this.categories.filter(
-						(element) => element.id != id
-					);
-				},
-				(error) => console.log('Erro ao excluir categoria', error)
-			);
-		}
-	};
 }

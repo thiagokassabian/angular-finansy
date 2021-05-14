@@ -4,11 +4,9 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
 
-import { TranslateModule } from '@ngx-translate/core';
-
 @NgModule({
 	declarations: [AppComponent],
-	imports: [CoreModule, AppRoutingModule, TranslateModule.forRoot()],
+	imports: [CoreModule, AppRoutingModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
