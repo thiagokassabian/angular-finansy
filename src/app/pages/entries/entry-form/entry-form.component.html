@@ -28,12 +28,15 @@
 								{{ option.value }}
 							</option>
 						</select>
-
+						<form-field-error
+							[form-control]="$any(resourceForm).get('type')"
+						></form-field-error>
+						<!-- 
 						<div class="text-danger" *ngIf="resourceForm.get('type').touched">
 							<div *ngIf="resourceForm.get('type').errors?.required">
 								Obrigatório
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="form-group col-md-6">
 						<label for="name">Lançamento</label>
@@ -44,14 +47,9 @@
 							formControlName="name"
 							required
 						/>
-						<div class="text-danger" *ngIf="resourceForm.get('name').touched">
-							<div *ngIf="resourceForm.get('name').errors?.required">
-								Obrigatório
-							</div>
-							<div *ngIf="resourceForm.get('name').errors?.minlength">
-								Mínimo 3 caracteres
-							</div>
-						</div>
+						<form-field-error
+							[form-control]="$any(resourceForm).get('name')"
+						></form-field-error>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="amount">Valor</label>
@@ -70,12 +68,9 @@
 								required
 							/>
 						</div>
-
-						<div class="text-danger" *ngIf="resourceForm.get('amount').touched">
-							<div *ngIf="resourceForm.get('amount').errors?.required">
-								Obrigatório
-							</div>
-						</div>
+						<form-field-error
+							[form-control]="$any(resourceForm).get('amount')"
+						></form-field-error>
 					</div>
 					<div class="form-group col-md-2">
 						<label for="date">Data</label>
@@ -89,11 +84,9 @@
 							[showButtonBar]="true"
 							[monthNavigator]="true"
 						></p-calendar>
-						<div class="text-danger" *ngIf="resourceForm.get('date').touched">
-							<div *ngIf="resourceForm.get('date').errors?.required">
-								Obrigatório
-							</div>
-						</div>
+						<form-field-error
+							[form-control]="$any(resourceForm).get('date')"
+						></form-field-error>
 					</div>
 				</div>
 				<div class="form-row">
@@ -130,11 +123,9 @@
 								Pendente
 							</button>
 						</div>
-						<div class="text-danger" *ngIf="resourceForm.get('paid').touched">
-							<div *ngIf="resourceForm.get('paid').errors?.required">
-								Obrigatório
-							</div>
-						</div>
+						<form-field-error
+							[form-control]="$any(resourceForm).get('paid')"
+						></form-field-error>
 					</div>
 					<div class="form-group col-md-3">
 						<label for="categoryId">Categoria</label>
@@ -148,15 +139,9 @@
 								{{ category.name }}
 							</option>
 						</select>
-
-						<div
-							class="text-danger"
-							*ngIf="resourceForm.get('categoryId').touched"
-						>
-							<div *ngIf="resourceForm.get('categoryId').errors?.required">
-								Obrigatório
-							</div>
-						</div>
+						<form-field-error
+							[form-control]="$any(resourceForm).get('categoryId')"
+						></form-field-error>
 					</div>
 				</div>
 				<div class="text-right">
@@ -168,12 +153,9 @@
 						Salvar
 					</button>
 				</div>
-				<div class="alert alert-danger" *ngIf="serverErrorMessages">
-					<p>Erro do servidor</p>
-					<ul>
-						<li *ngFor="let error of serverErrorMessages">{{ error }}</li>
-					</ul>
-				</div>
+				<server-error-messages
+					[server-error-messages]="serverErrorMessages"
+				></server-error-messages>
 			</form>
 		</div>
 	</div>
