@@ -1,1 +1,86 @@
-<p>reports works!</p>
+<div *ngIf="(spinnerService.isLoading | async) === false">
+	<app-breadcrumb [items]="[{ text: 'Relatórios' }]"></app-breadcrumb>
+
+	<page-header
+		page-name="Relatórios"
+		page-title="Lançamentos e despesas"
+		[show-button]="false"
+	></page-header>
+
+	<div class="card">
+		<div class="card-header">Relatórios de lançamentos e despesas</div>
+		<div class="card-body">
+			<form>
+				<div class="form-row">
+					<div class="form-group col-md-5 col-lg-6">
+						<label for="mes">Mês</label>
+						<select #month class="form-control" name="mes" id="mes">
+							<option value="">Selecione o mês</option>
+							<option *ngFor="let mes of meses" [value]="mes.key">
+								{{ mes.value }}
+							</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ano">Ano</label>
+						<select #year class="form-control" name="ano" id="ano">
+							<option value="">Selecione o ano</option>
+							<option *ngFor="let ano of anos" [value]="ano.key">
+								{{ ano.value }}
+							</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3 col-lg-2 d-flex align-items-end">
+						<button
+							type="button"
+							class="btn btn-primary w-100"
+							(click)="generateReports()"
+						>
+							Ver relatório
+						</button>
+					</div>
+				</div>
+			</form>
+			<div class="card-deck">
+				<div class="card text-white bg-success">
+					<div class="card-header text-center">Receitas</div>
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							{{ revenueTotal | currency }}
+						</h5>
+					</div>
+				</div>
+				<div class="card text-white bg-danger">
+					<div class="card-header text-center">Despesas</div>
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							{{ expenseTotal | currency }}
+						</h5>
+					</div>
+				</div>
+				<div class="card text-white bg-info">
+					<div class="card-header text-center">Saldo</div>
+					<div class="card-body">
+						<h5 class="card-title text-center">{{ balance | currency }}</h5>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-md-6">
+					<p-chart
+						type="bar"
+						[data]="revenueChartData"
+						[options]="chartOptions"
+					></p-chart>
+				</div>
+				<div class="col-md-6">
+					<p-chart
+						type="bar"
+						[data]="expenseChartData"
+						[options]="chartOptions"
+					></p-chart>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

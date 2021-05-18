@@ -58,7 +58,7 @@
 							"./node_modules/bootstrap/dist/js/bootstrap.min.js",
 							"./node_modules/chart.js/dist/Chart.js"
 						],
-						"allowedCommonJsDependencies": ["toastr"]
+						"allowedCommonJsDependencies": ["toastr", "chart.js"]
 					},
 					"configurations": {
 						"production": {
